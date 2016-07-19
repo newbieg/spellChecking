@@ -52,6 +52,22 @@ string dropNonChar(string input)
 	return modified;
 }
 
+string dumpChars(string &input, string dropList)
+{
+	for(int i = 0; i < input.length(); i ++)
+	{
+		for(int k = 0; k < dropList.length(); k ++)
+		{
+			if(input[i] == dropList[k])
+			{
+				input.erase(i, 1);
+				i --;
+			}
+		}
+	}
+	return input;
+}
+
 setWords::setWords()
 {
 

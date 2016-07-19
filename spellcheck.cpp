@@ -15,6 +15,8 @@ int main(int argc, char** argv)
 		for(int i = 1; i < argc; i ++)
 		{
 			string word = argv[i];
+			word = strLower(word);
+			word = dumpChars(word, "\",./?!#$()_[]{}|\\;:<>");
 			if(bob.checkSpell(word))
 			{
 //				cout << "Good Spellin'\n";
@@ -31,8 +33,10 @@ int main(int argc, char** argv)
 		{
 			string word = "";
 			cin >> word;
-			word = dropNonChar(word);
+			//word = dropNonChar(word);
 			word = strLower(word);
+			word = dumpChars(word, "\",./?!#$()_[]{}|\\;:<>");
+
 			if(bob.checkSpell(word))
 			{
 //				cout << "Good Spellin'\n";

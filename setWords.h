@@ -11,6 +11,7 @@
 
 std::string dropNonChar(std::string input);
 std::string strLower(std::string input);
+std::string dumpChars(std::string &input, std::string dropList);
 
 class setWords
 {
