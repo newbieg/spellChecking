@@ -1,4 +1,4 @@
-# spellChecking
+# Spell Checking
 g++ -std=c++11 spellCheck.cpp setWords.cpp
 
 A demo of the spell-checking capability of the setWords object. Depending on the dictionary that you use initial loading time can be over 2 seconds, but every word you check will be almost immediate.

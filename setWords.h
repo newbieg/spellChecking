@@ -5,7 +5,7 @@
 #ifndef SETMYDICTIONARYWORDS
 #define SETMYDICTIONARYWORDS
 
-
+#include <vector>
 #include <unordered_set>
 #include <string>
 
@@ -25,6 +25,7 @@ class setWords
 	void toLower(); // converts all strings to lowerCase.
 	void dropNonChars(); // drops all non-alphabetical and non-numeric characters
 	void print();
+	std::vector<std::string> wildCard(std::string start, std::string stop);
 	
 	
 	

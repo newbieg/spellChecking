@@ -152,6 +152,16 @@ bool setWords::checkSpell(string testWord)
 	return uol.find(testWord) != uol.end();
 }
 
+
+/** failed concept. Keep thinking about it...
+vector <string> setWords::wildCard(string start, string end)
+{
+	uol.find(start);
+		
+}
+/**/
+
+
 /*
 int main()
 {
