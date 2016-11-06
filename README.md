@@ -18,7 +18,13 @@ Quickly add words to an existing dictionary.
 This program is set up to read all words from a text file and slam them into a compiled dictionary. 
 To add words to an existing dictionary, include that dictionary as a file to be read and as the final output.
 
+# Caesar
+g++ -std=c++11 caesar.cpp setWords.cpp
+
+Decode and Encode messages using a caesar cypher (or rot13). This is a toy, do not use for anything requiring actual encryption. The fact that this code can guess the correct encryption key in less than a second should indicate that this is <em>NOT</em> a proffesional encryption method.
+
 # Wild Cards
 g++ wildCard.cpp
 
 Testing how to set up a wild-card comparison function. Nothing permanent here yet. Not compatible with my current setup, but I'm saving the function for reuse in the future.
+
