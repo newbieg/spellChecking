@@ -1,3 +1,9 @@
+/* Use this program to extract unique words from a book. These words will not be saved in any order, 
+ * It does not handle hyphens and other non alphabetical chars, they are simply dropped. It is suggested
+ * that after collecting all your words, that you run the resulting file through this program a couple more times untill
+ * the resulting file stops growing/shrinking in size.  
+ *
+ */
 #include "setWords.h"
 #include <iostream>
 #include <string>

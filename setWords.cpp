@@ -104,6 +104,7 @@ bool setWords::save(string fileName)
 		}
 	}	
 
+	outFile.close();
 	return !(notDone);
 }
 
