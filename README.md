@@ -21,7 +21,8 @@ To add words to an existing dictionary, include that dictionary as a file to be 
 # Caesar
 g++ -std=c++11 caesar.cpp setWords.cpp
 
-Decode and Encode messages using a caesar cypher (or rot13). This is a toy, do not use for anything requiring actual encryption. The fact that this code can guess the correct encryption key in less than a second should indicate that this is <em style="background:red;">NOT</em> a proffesional encryption method.
+Decode and Encode messages using a caesar cypher (or rot13). This is a toy, do not use for anything requiring actual encryption. The fact that this code can guess the correct encryption key in less than a second should indicate that this is <em style="color: red;">NOT</em> a proffesional encryption method.
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQny2VaGJLzgYvDjFdqL4pESFlhWOrPZPR3sbj00t25SN_1AmqQqA" alt="Caesar Salad, pic is from pixabay and was labeled for reuse with modification." width=400px height = 300px>
 
 # Wild Cards
 g++ wildCard.cpp
