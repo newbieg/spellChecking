@@ -23,7 +23,9 @@ g++ -std=c++11 caesar.cpp setWords.cpp
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQny2VaGJLzgYvDjFdqL4pESFlhWOrPZPR3sbj00t25SN_1AmqQqA" alt="Caesar Salad, pic is from pixabay and was labeled for reuse with modification." width=400px height = 300px>
 
-Decode and Encode messages using a caesar cypher (or rot13). This is a toy, do not use for anything requiring actual encryption. The fact that this code can guess the correct encryption key in less than a second should indicate that this is <em style="color: red;">NOT</em> a proffesional encryption method.
+Decode and Encode messages using a caesar cypher (or rot13). This is a toy, do not use for anything requiring actual encryption. The fact that this code can guess the correct encryption key in less than a second using a brute-force method should indicate that this is <em style="color: red;">NOT</em> a proffesional encryption method. 
+I chose the brute force method of decryption because it is so easy to break, and it had a better chance of accuracy. The other method, saying that 'e' is the most common letter and knowing how common the rest are, well, that's a good idea for a long message, but loses accuracy as the message you're dealing with gets shorter. If the appropriate library is used, this might even be faster than the 'character fingerprint' method for all languages, though that's just me spouting out nonsense since I haven't tested it in any other language besides what you're reading right now.
+The main goal of this file was to practice code reuse and code maintenance. I'm eventually going to rewrite it to deal with punctuation and capital letters, but for now proof of concept is solid. 
 
 # Wild Cards
 g++ wildCard.cpp
