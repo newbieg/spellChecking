@@ -5,6 +5,7 @@
 #include "setWords.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 
 
@@ -76,16 +77,17 @@ setWords::setWords()
 bool setWords::load(string fileName)
 {
 	string word;
+	stringstream ss;
 	bool result = false;
 	ifstream inFile(fileName.c_str());
 	if(inFile.good())
 	{
-		result = true;
-		while(!(inFile.eof()) && inFile.good())
+		ss << inFile.rdbuf();
+		while(ss >> word)
 		{
-			inFile >> word; 
 			addWord(word);
 		}
+		result = true;
 	}
 	
 	inFile.close();
