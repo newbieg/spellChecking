@@ -22,6 +22,11 @@ using namespace std;
 string debugString; /* If you find a problem (usually with user input), just set this string to describe it. 
 			Should be fully descriptive, since it will also halt any atempt at encode/decode. */
 
+int wordsToGuess = 0; /* set with the -n command
+			 if decoding a large-content file then set this to any number to reduce guessing time.
+			Usually 5 to 10 is accurate enough. I added this in because I tried to encode and decode a
+			full book and it took 3 seconds to run the code, which was an eternity in computer time.*/
+
 bool isNum(char* arg)
 {
 	bool answer = true;
@@ -67,6 +72,7 @@ void displayHelp()
 	<< "\tyour library should have a single word per line, no non-alphabetical characters.\n"
 	<< "-d = specify the action as decode, cancels out -e \n"
 	<< "-e Number = specify that the content should be encoded using a shift of \"Number\", 26 being the most common\n" 
+	<< "-n Number = Reduce guessing time by making a guess about offset in the first Number of words encountered.\n"
 	<< "-o fileName = output goes to fileName instead of standard output.\n"
 	<< "-a = Show all possible matching cypher shifts, it's possible that the best guess is the wrong one I guess...\n"
 	<< "-h = Help content\n"
@@ -116,14 +122,32 @@ bool testShift(string &input, setWords &dictionary, vector <int> & foundWith)
 	{
 		foundWith.push_back(0);
 	}
-	while(ss >> temp)
+	if(wordsToGuess == 0)
 	{
-		for(int i = 0; i <= 26; i ++)
+		while(ss >> temp)
 		{
-			if(dictionary.checkSpell(strLower(basicShift(temp, i))) == true)
+			for(int i = 0; i <= 26; i ++)
 			{
-				possibleMatch = true;
-				foundWith[i] ++;
+				if(dictionary.checkSpell(strLower(basicShift(temp, i))) == true)
+				{
+					possibleMatch = true;
+					foundWith[i] ++;
+				}
+			}
+		}
+	}
+	else
+	{
+		while(ss >> temp && wordsToGuess > 0)
+		{
+			wordsToGuess --;
+			for(int i = 0; i <= 26; i ++)
+			{
+				if(dictionary.checkSpell(strLower(basicShift(temp, i))) == true)
+				{
+					possibleMatch = true;
+					foundWith[i] ++;
+				}
 			}
 		}
 	}
@@ -249,7 +273,20 @@ int main(int argc, char ** argv)
 				}
 				else
 				{
-					debugString = "The argument -e rquires a number to offset by:\n\t-e 13\n";
+					debugString = "The argument -e requires a number to offset by:\n\t-e 13\n";
+				}
+			}
+			else if(temp == "-n")
+			{
+				if(isNum(argv[i + 1]))
+				{
+					string temp = argv[i+1];
+					wordsToGuess = stoi(temp);
+					i ++;
+				}
+				else
+				{
+					debugString = "The argument -e requires a number of words to use for guessing:\n\t-n 10\nIn many cases any number greater than 4 will be pretty accurate.\n";
 				}
 			}
 			else if(temp == "-o")
