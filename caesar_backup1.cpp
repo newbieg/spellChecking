@@ -19,8 +19,7 @@
 
 using namespace std;
 
-string debugString; /* If you find a problem (usually with user input), just set this string to describe it. 
-			Should be fully descriptive, since it will also halt any atempt at encode/decode. */
+string debugString;
 
 bool isNum(char* arg)
 {
@@ -77,27 +76,6 @@ void displayHelp()
 
 }
 
-string basicShift(string input, int offset)
-{
-	string tempShiftString = "";
-	for(int k = 0; k < input.length(); k ++)
-	{
-		if(input[k] >='A' && input[k] <= 'Z')
-		{
-			tempShiftString += 'A' + ((input[k] - 'A' + offset) % 26);
-		}
-		else if(input[k] >= 'a' && input[k] <= 'z')
-		{
-			tempShiftString += 'a' + ((input[k] - 'a' + offset) % 26);
-		}
-		else
-		{
-			tempShiftString += input[k];
-		}
-	}
-	return tempShiftString;
-}
-
 //return 0 if no matching words were found for any words. 
 //foundWith is going to contain the number of matches found for each shift, just in case there's a possibility of multiple matches we want the best,
 // 	but if there's a lot of non-characters or junk to throw off guessing we might want all possible matching, we may also get false-matches.
@@ -120,7 +98,13 @@ bool testShift(string &input, setWords &dictionary, vector <int> & foundWith)
 	{
 		for(int i = 0; i <= 26; i ++)
 		{
-			if(dictionary.checkSpell(strLower(basicShift(temp, i))) == true)
+			testShiftString = "";
+			for(int k = 0; k < temp.length(); k ++)
+			{
+				testShiftString += 'a' + ((temp[k] - 'a' + i) % 26);
+			}
+			
+			if(dictionary.checkSpell(strLower(testShiftString)) == true)
 			{
 				possibleMatch = true;
 				foundWith[i] ++;
@@ -143,12 +127,10 @@ string decodeStringAll(string input, vector <int> testedShift)
 			string temp;
 			while(ss >> temp)
 			{
-				/*
 				for(int i = 0; i <= temp.length() - 1; i ++)
 				{
 					output += ('a' + ((temp[i] - 'a') + h)%26);
-				}*/
-				output += basicShift(temp, h);
+				}
 				output += " ";
 			}
 			output += "\n";
@@ -179,14 +161,10 @@ string decodeStringBest(string input, vector <int> testedShift)
 	string temp;
 	while(ss >> temp)
 	{
-		/*
 		for(int i = 0; i <= temp.length() - 1; i ++)
 		{
 			output += ('a' + ((temp[i] - 'a') + bestMatch)%26);
 		}
-		*/
-		
-		output += basicShift(temp, bestMatch);
 		output += " ";
 	}
 	return output;
@@ -314,10 +292,11 @@ string string_shift;  // string to hold the amount to shift if encode is specifi
 				stringstream dropWS;
 				dropWS.str(content);
 				
+				cout << "encoding: \n";
 				string temp;
 				while(dropWS >> temp)
 				{
-					output += basicShift(temp, stoi(string_shift));
+					output += encodeString(temp, stoi(string_shift));
 					output += " ";
 				}
 				/* encode the content based on the string_shift */
@@ -348,7 +327,7 @@ string string_shift;  // string to hold the amount to shift if encode is specifi
 				
 			else
 			{
-				cout << output << endl;
+				cout << output;
 			}
 			cout << endl;		
 		}
